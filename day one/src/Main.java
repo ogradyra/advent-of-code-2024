@@ -24,10 +24,29 @@ public class Main {
         List<Integer> sortedListOne = listOne.stream().sorted().toList();
         List<Integer> sortedListTwo = listTwo.stream().sorted().toList();
 
+        System.out.println(partOne(sortedListOne, sortedListTwo));
+        System.out.println(partTwo(sortedListOne, sortedListTwo));
+    }
+
+    private static int partTwo(List<Integer> sortedListOne, List<Integer> sortedListTwo) {
+        int similarityScore = 0;
+        for (int idOne : sortedListOne){
+            int similarityFactor = 0;
+            for (int idTwo : sortedListTwo){
+                if (idOne == idTwo){
+                    similarityFactor++;
+                }
+            }
+            similarityScore += (idOne * similarityFactor);
+        }
+        return similarityScore;
+    }
+
+    private static int partOne(List<Integer> sortedListOne, List<Integer> sortedListTwo) {
         int difference = 0;
         for (int i = 0; i < sortedListTwo.size(); i++){
             difference += Math.abs(sortedListTwo.get(i) - sortedListOne.get(i));
         }
-        System.out.println(difference);
+        return difference;
     }
 }
